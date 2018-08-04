@@ -11,42 +11,45 @@ namespace PainelDeCursos.Controllers
     public class CursoController : ApiController
     {
         // GET: api/Curso
-        public IEnumerable<Cursos> Get()
+        public IEnumerable<Curso> Get()
         {
-            Cursos curso = new Cursos();
+            Curso curso = new Curso();
 
-            return curso.listaCursos();
+            return curso.ListarCurso();
         }
 
         // GET: api/Curso/5
-        public Cursos Get(int id)
+        public Curso Get(int id)
         {
-            Cursos curso = new Cursos();
+            Curso curso = new Curso();
 
-            return curso.listaCursos().Where(x => x.id == id).FirstOrDefault();
-
+            return curso.ListarCurso().Where(x => x.id == id).FirstOrDefault();
         }
 
         // POST: api/Curso
-        public List<Cursos> Post(Cursos curso)
+        public List<Curso> Post(Curso curso)
         {
+            Curso _curso = new Curso();
 
-            List<Cursos> cursos = new List<Cursos>();
-
-            cursos.Add(curso);
-
-            return cursos;
-
+            _curso.Inserir(curso);
+                        
+            return _curso.ListarCurso();
         }
 
         // PUT: api/Curso/5
-        public void Put(int id, [FromBody]string value)
+        public Curso Put(int id, [FromBody]Curso curso)
         {
+            Curso _curso = new Curso();
+
+            return _curso.Atualizar(id, curso);
         }
 
         // DELETE: api/Curso/5
         public void Delete(int id)
         {
+            Curso _curso = new Curso();
+
+            _curso.Deletar(id);
         }
     }
 }

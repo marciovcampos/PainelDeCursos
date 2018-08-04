@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "id": 1,
     "status": "Ativo",
@@ -22,5 +22,13 @@
     "nome": "Curso 3",
     "descricao": "Descrição 3",
     "qtdAlunos": 512
+  },
+  {
+    "id": 4,
+    "status": "Ativo",
+    "empresa": "Empresa 4",
+    "nome": "Curso 4",
+    "descricao": "Descrição 4",
+    "qtdAlunos": 1024
   }
 ]
