@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace PainelDeCursos.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class CursoController : ApiController
     {
         // GET: api/Curso

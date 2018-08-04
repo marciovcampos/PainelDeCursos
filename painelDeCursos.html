@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div><label>Empresa</label><input id="empresa" type="text"></div>
+    <div><label>Nome do Curso</label><input id="nomeCurso" type="text"></div>
+    <div><label>Descrição</label><input id="descricao" type="text"></div>
+    <div><label>Qtd. de Alunos</label><input id="qtdAlunos" type="text"></div>
+    <div>
+        <button onclick="Cadastrar()">Cadastrar</button>        
+        <button>Limpar</button>
+    </div>
+
+    <table border=1>
+        <thead>
+            <tr>
+                <td>Empresa</td>
+                <td>Nome do Curso</td>
+                <td>Descrição</td>
+                <td>Qtd. de Aluno</td>
+                <td>Edição e Conteúdo</td>
+            </tr>
+        </thead>
+        <tbody>            
+        </tbody>
+    </table>  
+    <script type="text/javascript">
+
+    var tbody = document.querySelector('table tbody');
+
+    function Cadastrar(){
+        var _empresa = document.querySelector("#empresa").value;
+        var _nomeCurso = document.querySelector("#nomeCurso").value;
+        var _descricao = document.querySelector("#descricao").value;
+        var _qtdAlunos = document.querySelector("#qtdAlunos").value;
+
+        var curso = {
+            empresa: _empresa,
+            nome: _nomeCurso,
+            descricao: _descricao,
+            qtdAlunos: _qtdAlunos
+        }     
+
+        carregaCursos('POST', 0, curso); 
+    }
+
+    function carregaCursos(metodo, id, corpo){
+
+        tbody.innerHTML = '';
+
+        var xhr = new XMLHttpRequest();
+
+        if (id === undefined)
+            id = '';
+
+        xhr.open(metodo, `http://localhost:62920/api/Curso/${id}`, true);
+
+        xhr.onload = function(){
+            console.log(this.responseText);      
+            var cursos = JSON.parse(this.responseText);
+            for(var indice in cursos){
+                adicionaLinha(cursos[indice]);
+            }      
+        }
+
+        if(corpo !== undefined){
+            xhr.setRequestHeader('content-type', 'application/json');
+            xhr.send(JSON.stringify(corpo));
+        }else{
+            xhr.send();
+        }        
+    }
+
+    carregaCursos('GET');
+
+    function adicionaLinha(curso){
+        
+        var trow = `<tr>
+                    <td>${curso.empresa}</td>
+                    <td>${curso.nome}</td>
+                    <td>${curso.descricao}</td>
+                    <td>${curso.qtdAlunos}</td> 
+                    <td><button onclick="editarCurso(${curso.id})">Editar</button></td>              
+                </tr>`;
+
+        tbody.innerHTML += trow;
+
+    }
+
+    function editarCursos(id){
+        console.log(id);
+    }
+    
+    </script>  
+</body>
+</html>
