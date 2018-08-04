@@ -1,0 +1,26 @@
+﻿[
+  {
+    "id": 1,
+    "status": "Ativo",
+    "empresa": "Empresa 1",
+    "nome": "Curso 1",
+    "descricao": "Descrição 1",
+    "qtdAlunos": 128
+  },
+  {
+    "id": 2,
+    "status": "Ativo",
+    "empresa": "Empresa 2",
+    "nome": "Curso 2",
+    "descricao": "Descrição 2",
+    "qtdAlunos": 256
+  },
+  {
+    "id": 3,
+    "status": "Inativo",
+    "empresa": "Empresa 3",
+    "nome": "Curso 3",
+    "descricao": "Descrição 3",
+    "qtdAlunos": 512
+  }
+]

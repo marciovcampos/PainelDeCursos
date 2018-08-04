@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 
 namespace PainelDeCursos.Models
 {
@@ -16,28 +19,12 @@ namespace PainelDeCursos.Models
 
         public List<Cursos> listaCursos()
         {
+            var caminhoArquivo = HostingEnvironment.MapPath(@"~/App_Data/Base.json");
 
-            Cursos curso1 = new Cursos();
-            curso1.id = 1;
-            curso1.status = "Ativo";
-            curso1.empresa = "Empresa 1";
-            curso1.nome = "Curso 1";
-            curso1.descricao = "Descrição 1";
-            curso1.qtdAlunos = 128;
+            var json = File.ReadAllText(caminhoArquivo);
 
-            Cursos curso2 = new Cursos();
-            curso2.id = 2;
-            curso2.status = "Ativo";
-            curso2.empresa = "Empresa 2";
-            curso2.nome = "Curso 2";
-            curso2.descricao = "Descrição 2";
-            curso2.qtdAlunos = 256;
-
-            List<Cursos> listaCursos = new List<Cursos>();
-
-            listaCursos.Add(curso1);
-            listaCursos.Add(curso2);
-
+            var listaCursos = JsonConvert.DeserializeObject<List<Cursos>>(json);
+            
             return listaCursos;
 
         }

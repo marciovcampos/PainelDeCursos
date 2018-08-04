@@ -28,8 +28,15 @@ namespace PainelDeCursos.Controllers
         }
 
         // POST: api/Curso
-        public void Post([FromBody]string value)
+        public List<Cursos> Post(Cursos curso)
         {
+
+            List<Cursos> cursos = new List<Cursos>();
+
+            cursos.Add(curso);
+
+            return cursos;
+
         }
 
         // PUT: api/Curso/5
