@@ -7,14 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-
+    <h2 id="titulo">Cadastrar Curso</h2>
     <div><label>Empresa</label><input id="empresa" type="text"></div>
     <div><label>Nome do Curso</label><input id="nomeCurso" type="text"></div>
     <div><label>Descrição</label><input id="descricao" type="text"></div>
     <div><label>Qtd. de Alunos</label><input id="qtdAlunos" type="text"></div>
     <div>
-        <button onclick="Cadastrar()">Cadastrar</button>        
-        <button>Limpar</button>
+        <button id="btnSalvar" onclick="Cadastrar()">Cadastrar</button>        
+        <button id="btnCancelar" onclick="Cancelar()">Limpar</button>
     </div>
 
     <table border=1>
@@ -33,33 +33,33 @@
     <script type="text/javascript">
 
     var tbody = document.querySelector('table tbody');
+    var curso;
+
+    carregaCursos();
 
     function Cadastrar(){
-        var _empresa = document.querySelector("#empresa").value;
-        var _nomeCurso = document.querySelector("#nomeCurso").value;
-        var _descricao = document.querySelector("#descricao").value;
-        var _qtdAlunos = document.querySelector("#qtdAlunos").value;
-
-        var curso = {
-            empresa: _empresa,
-            nome: _nomeCurso,
-            descricao: _descricao,
-            qtdAlunos: _qtdAlunos
+             
+        curso.empresa = document.querySelector("#empresa").value;
+        curso.nome = document.querySelector("#nomeCurso").value;
+        curso.descricao = document.querySelector("#descricao").value;
+        curso.qtdAlunos = document.querySelector("#qtdAlunos").value;
+        
+        if (curso.id === undefined || curso.id === 0){
+            salvarCursos('POST', 0, curso); 
+        }else{
+            salvarCursos('PUT', curso.id, curso); 
         }     
 
-        carregaCursos('POST', 0, curso); 
+        carregaCursos();         
     }
 
-    function carregaCursos(metodo, id, corpo){
+    function carregaCursos(){
 
         tbody.innerHTML = '';
 
         var xhr = new XMLHttpRequest();
-
-        if (id === undefined)
-            id = '';
-
-        xhr.open(metodo, `http://localhost:62920/api/Curso/${id}`, true);
+       
+        xhr.open('GET', `http://localhost:62920/api/Curso`, true);
 
         xhr.onload = function(){
             console.log(this.responseText);      
@@ -69,15 +69,22 @@
             }      
         }
 
-        if(corpo !== undefined){
-            xhr.setRequestHeader('content-type', 'application/json');
-            xhr.send(JSON.stringify(corpo));
-        }else{
-            xhr.send();
-        }        
+        xhr.send();
+                
     }
 
-    carregaCursos('GET');
+    function salvarCursos(metodo, id, corpo){
+        var xhr = new XMLHttpRequest();
+
+        if (id === undefined || id === 0)
+            id = '';
+
+        xhr.open(metodo, `http://localhost:62920/api/Curso/${id}`, false);
+        
+        xhr.setRequestHeader('content-type', 'application/json');
+        xhr.send(JSON.stringify(corpo));
+              
+    }   
 
     function adicionaLinha(curso){
         
@@ -86,15 +93,45 @@
                     <td>${curso.nome}</td>
                     <td>${curso.descricao}</td>
                     <td>${curso.qtdAlunos}</td> 
-                    <td><button onclick="editarCurso(${curso.id})">Editar</button></td>              
+                    <td><button onclick='editarCurso(${JSON.stringify(curso)})'>Editar</button></td>              
                 </tr>`;
 
         tbody.innerHTML += trow;
 
     }
 
-    function editarCursos(id){
-        console.log(id);
+    function editarCurso(_curso){
+       var btnSalvar = document.querySelector("#btnSalvar");
+       var btnCancelar = document.querySelector("#btnCancelar");
+       var titulo = document.querySelector("#titulo");
+
+       document.querySelector("#empresa").value = _curso.empresa;
+       document.querySelector("#nomeCurso").value = _curso.nome;
+       document.querySelector("#descricao").value = _curso.descricao;
+       document.querySelector("#qtdAlunos").value = _curso.qtdAlunos;
+
+       btnSalvar.textContent = "Salvar";
+       btnCancelar.textContent = "Cancelar";
+       titulo.textContent = `Editar Curso ${_curso.nome}`;
+
+       curso = _curso;
+
+       console.log(curso);
+    }
+
+    function Cancelar(){
+        var btnSalvar = document.querySelector("#btnSalvar");
+        var btnCancelar = document.querySelector("#btnCancelar");
+        var titulo = document.querySelector("#titulo");
+
+        document.querySelector("#empresa").value = '';
+        document.querySelector("#nomeCurso").value = '';
+        document.querySelector("#descricao").value = '';
+        document.querySelector("#qtdAlunos").value = '';
+
+        btnSalvar.textContent = "Cadastrar";
+        btnCancelar.textContent = "Limpar";
+        titulo.textContent = "Cadastrar Curso";
     }
     
     </script>  
