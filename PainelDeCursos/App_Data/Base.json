@@ -54,21 +54,5 @@
     "nome": "Curso 7",
     "descricao": "Descrição 7",
     "qtdAlunos": 4096
-  },
-  {
-    "id": 8,
-    "status": null,
-    "empresa": "Empresa 8",
-    "nome": "Curso 8",
-    "descricao": "Descrição 8",
-    "qtdAlunos": 10000
-  },
-  {
-    "id": 10,
-    "status": null,
-    "empresa": "Empresa 10",
-    "nome": "Curso 10",
-    "descricao": "Descrição 5",
-    "qtdAlunos": 0
   }
 ]
