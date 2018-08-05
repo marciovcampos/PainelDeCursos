@@ -46,13 +46,5 @@
     "nome": "Curso 6 ",
     "descricao": "Descrição 6",
     "qtdAlunos": 4096
-  },
-  {
-    "id": 7,
-    "status": null,
-    "empresa": "Empresa 7",
-    "nome": "Curso 7",
-    "descricao": "Descrição 7",
-    "qtdAlunos": 4096
   }
 ]

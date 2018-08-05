@@ -63,9 +63,26 @@ function excluirCurso(id){
 
 }
 
-function excluir(id){
-    excluirCurso(id);
-    carregaCursos();
+function excluir(curso){    
+    bootbox.confirm({
+        message: `Tem certeza que deseja excluir o curso ${curso.nome}?`,
+        buttons: {
+            confirm: {
+                label: 'SIM',
+                className: 'btn-success'
+            },
+            cancel: {
+                label: 'NÃO',
+                className: 'btn-danger'
+            }
+        },
+        callback: function (result) {
+            if(result){
+                excluirCurso(curso.id);
+                carregaCursos();
+            }
+        }
+    });
 }
 
 function adicionaLinha(curso){
@@ -77,7 +94,7 @@ function adicionaLinha(curso){
                 <td>${curso.qtdAlunos}</td> 
                 <td>
                     <button class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick='editarCurso(${JSON.stringify(curso)})'>Editar</button>             
-                    <button class="btn btn-danger" onclick='excluir(${curso.id})'>Excluir</button>
+                    <button class="btn btn-danger" onclick='excluir(${JSON.stringify(curso)})'>Excluir</button>
                 </td>              
             </tr>`;
 
