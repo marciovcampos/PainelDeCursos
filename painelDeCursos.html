@@ -33,7 +33,7 @@
     <script type="text/javascript">
 
     var tbody = document.querySelector('table tbody');
-    var curso;
+    var curso = {};
 
     carregaCursos();
 
@@ -86,6 +86,21 @@
               
     }   
 
+    function excluirCurso(id){
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('DELETE', `http://localhost:62920/api/Curso/${id}`, false);
+              
+        xhr.send();
+
+    }
+
+    function excluir(id){
+        excluirCurso(id);
+        carregaCursos();
+    }
+
     function adicionaLinha(curso){
         
         var trow = `<tr>
@@ -93,7 +108,10 @@
                     <td>${curso.nome}</td>
                     <td>${curso.descricao}</td>
                     <td>${curso.qtdAlunos}</td> 
-                    <td><button onclick='editarCurso(${JSON.stringify(curso)})'>Editar</button></td>              
+                    <td>
+                        <button onclick='editarCurso(${JSON.stringify(curso)})'>Editar</button>             
+                        <button onclick='excluir(${curso.id})'>Excluir</button>
+                    </td>              
                 </tr>`;
 
         tbody.innerHTML += trow;
@@ -128,6 +146,8 @@
         document.querySelector("#nomeCurso").value = '';
         document.querySelector("#descricao").value = '';
         document.querySelector("#qtdAlunos").value = '';
+
+        aluno = {};
 
         btnSalvar.textContent = "Cadastrar";
         btnCancelar.textContent = "Limpar";

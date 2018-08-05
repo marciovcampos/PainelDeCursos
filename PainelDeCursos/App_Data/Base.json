@@ -60,16 +60,8 @@
     "status": null,
     "empresa": "Empresa 8",
     "nome": "Curso 8",
-    "descricao": "",
-    "qtdAlunos": 0
-  },
-  {
-    "id": 9,
-    "status": null,
-    "empresa": "Empresa 9",
-    "nome": "",
-    "descricao": "",
-    "qtdAlunos": 0
+    "descricao": "Descrição 8",
+    "qtdAlunos": 10000
   },
   {
     "id": 10,
