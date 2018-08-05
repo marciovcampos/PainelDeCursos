@@ -16,7 +16,8 @@ function Cadastrar(){
         salvarCursos('PUT', curso.id, curso); 
     }     
 
-    carregaCursos();         
+    carregaCursos(); 
+    $('#myModal').modal('hide');        
 }
 
 function carregaCursos(){
@@ -75,7 +76,7 @@ function adicionaLinha(curso){
                 <td>${curso.descricao}</td>
                 <td>${curso.qtdAlunos}</td> 
                 <td>
-                    <button class="btn btn-info" onclick='editarCurso(${JSON.stringify(curso)})'>Editar</button>             
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick='editarCurso(${JSON.stringify(curso)})'>Editar</button>             
                     <button class="btn btn-danger" onclick='excluir(${curso.id})'>Excluir</button>
                 </td>              
             </tr>`;
@@ -85,18 +86,16 @@ function adicionaLinha(curso){
 }
 
 function editarCurso(_curso){
-    var btnSalvar = document.querySelector("#btnSalvar");
-    var btnCancelar = document.querySelector("#btnCancelar");
-    var titulo = document.querySelector("#titulo");
+    var btnSalvar = document.querySelector("#btnSalvar");    
+    var titulo = document.querySelector("#tituloModal");
 
     document.querySelector("#empresa").value = _curso.empresa;
     document.querySelector("#nomeCurso").value = _curso.nome;
     document.querySelector("#descricao").value = _curso.descricao;
     document.querySelector("#qtdAlunos").value = _curso.qtdAlunos;
 
-    btnSalvar.textContent = "Salvar";
-    btnCancelar.textContent = "Cancelar";
-    titulo.textContent = `Editar Curso ${_curso.nome}`;
+    btnSalvar.textContent = "Salvar";  
+    titulo.textContent = `Editar Curso - ${_curso.nome}`;
 
     curso = _curso;
 
@@ -104,9 +103,8 @@ function editarCurso(_curso){
 }
 
 function Cancelar(){
-    var btnSalvar = document.querySelector("#btnSalvar");
-    var btnCancelar = document.querySelector("#btnCancelar");
-    var titulo = document.querySelector("#titulo");
+    var btnSalvar = document.querySelector("#btnSalvar");    
+    var titulo = document.querySelector("#tituloModal");
 
     document.querySelector("#empresa").value = '';
     document.querySelector("#nomeCurso").value = '';
@@ -116,7 +114,25 @@ function Cancelar(){
     aluno = {};
 
     btnSalvar.textContent = "Cadastrar";
-    btnCancelar.textContent = "Limpar";
     titulo.textContent = "Cadastrar Curso";
+
+    $('#myModal').modal('hide');
+}
+
+function NovoAluno(){
+    var btnSalvar = document.querySelector("#btnSalvar");    
+    var titulo = document.querySelector("#tituloModal");
+
+    document.querySelector("#empresa").value = '';
+    document.querySelector("#nomeCurso").value = '';
+    document.querySelector("#descricao").value = '';
+    document.querySelector("#qtdAlunos").value = '';
+
+    aluno = {};
+
+    btnSalvar.textContent = "Cadastrar";
+    titulo.textContent = "Cadastrar Curso";
+
+    $('#myModal').modal('show');
 }
     
