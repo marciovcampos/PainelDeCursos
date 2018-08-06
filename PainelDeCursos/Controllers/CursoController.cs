@@ -1,4 +1,5 @@
-﻿using PainelDeCursos.Models;
+﻿using PainelDeCursos.Domain.Cursos.Repository;
+using PainelDeCursos.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,46 +13,42 @@ namespace PainelDeCursos.Controllers
     [EnableCors("*", "*", "*")]
     public class CursoController : ApiController
     {
+        public ICursoRepository CursoRepository { get; }
+
+        public CursoController(ICursoRepository cursoRepository)
+        {
+            CursoRepository = cursoRepository;
+        }
+
         // GET: api/Curso
         public IEnumerable<Curso> Get()
         {
-            Curso curso = new Curso();
-
-            return curso.ListarCurso();
+            return CursoRepository.Listar().Where(x => x.Status.Equals("Active")).OrderBy(x => x.Company).ToList();
         }
 
         // GET: api/Curso/5
         public Curso Get(int id)
         {
-            Curso curso = new Curso();
-
-            return curso.ListarCurso().Where(x => x.id == id).FirstOrDefault();
+            return CursoRepository.Listar().Where(x => x.Id == id).FirstOrDefault();
         }
 
         // POST: api/Curso
         public List<Curso> Post(Curso curso)
         {
-            Curso _curso = new Curso();
-
-            _curso.Inserir(curso);
-                        
-            return _curso.ListarCurso();
+            CursoRepository.Inserir(curso);                        
+            return CursoRepository.Listar();
         }
 
         // PUT: api/Curso/5
         public Curso Put(int id, [FromBody]Curso curso)
         {
-            Curso _curso = new Curso();
-
-            return _curso.Atualizar(id, curso);
+            return CursoRepository.Atualizar(id, curso);
         }
 
         // DELETE: api/Curso/5
         public void Delete(int id)
         {
-            Curso _curso = new Curso();
-
-            _curso.Deletar(id);
+            CursoRepository.Deletar(id);
         }
     }
 }
