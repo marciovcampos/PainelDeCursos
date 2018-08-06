@@ -60,8 +60,15 @@ namespace PainelDeCursos.Infra.Data.Repository
         {
             var listaCursos = this.Listar();
 
-            var maxId = listaCursos.Max(cursoItem => curso.Id);
+            List<int> ids = new List<int>();            
+            foreach (Curso _curso in listaCursos)
+            {
+                ids.Add(_curso.Id);
+            }
+
+            var maxId = ids.Max();
             curso.Id = maxId + 1;
+
             listaCursos.Add(curso);
 
             RescreverArquivo(listaCursos);

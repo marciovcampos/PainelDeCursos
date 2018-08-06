@@ -8,21 +8,23 @@ Painel de Cursos é uma aplicação Web desenvolvida usando ASP.NET Web API.
 
 O projeto foi divido em 4 camadas (UI, Camada da Apresentação, Camada de Domínio e a Camada de Dados).
 
-Essa arquitetura foi escolhida para diminuir o acoplamento e aumentar a coesão dos projetos, facilitando a manutenção e a evolução do mesmo.
-Um exemplo disso seria a facilidade de trocar a camada de UI de JavaScript para angular, pois não havia necessidade de alterar as outras três camadas.
+Essa arquitetura foi escolhida para diminuir o acoplamento e aumentar a coesãos do projetos, facilitando a manutenção e a evolução dos mesmos.
+Um exemplo disso seria a facilidade de trocar a camada de UI de JavaScript para angular, pois não haveria necessidade de alterar as outras três camadas.
 
 Foi utilizado o padrão de arquitetura em camadas, juntamente com MVC, injeção de dependências e o repository.
 No projeto .Net foi utilizado a biblioteca Unity para resolução da injeção de dependências e também a Newtonsoft.JSON para conversão de JSON em objeto.
 
+<img align="center" src="https://github.com/marciovcampos/PainelDeCursos/blob/master/doc/arquitetura.JPG"/>
+
 ### UI
 
-A pasta client possui a UI (Interfarce de Usúario). Ela foi construída utilizando HTML5, CSS3, BootStrap 3, JavaScript e JQuery.
+A pasta client possui a UI (Interface de Usuário). Ela foi construída utilizando HTML5, CSS3, BootStrap 3, JavaScript e JQuery.
 Ela é responsável por exibir as informações aos usuários e consumir a Web API .Net.
 
 ### Camada de Apresentação
 
 Na pasta PainelDeCursos se encontram a Controller e a pasta App_Data.
-A pasta App_Data contém o arquivo data.json que é utilizado como nossa base de dados.
+A pasta Files contém o arquivo data.json que é utilizado como nossa base de dados.
 
 ### Camada de Domínio
 
@@ -52,6 +54,8 @@ A pasta PainelDeCurso.Infra.Data é responsável pelo acesso aos dados que são 
 <img align="center" src="https://github.com/marciovcampos/PainelDeCursos/blob/master/doc/02.JPG"/>
 <img align="center" src="https://github.com/marciovcampos/PainelDeCursos/blob/master/doc/03.JPG"/>
 <img align="center" src="https://github.com/marciovcampos/PainelDeCursos/blob/master/doc/04.JPG"/>
+
+
 
 
 

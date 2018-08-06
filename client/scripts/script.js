@@ -9,6 +9,7 @@ function Cadastrar(){
     curso.Name = document.querySelector("#nomeCurso").value;
     curso.Description = document.querySelector("#descricao").value;
     curso.Quantity = document.querySelector("#qtdAlunos").value;
+    curso.Status = "Active";
     
     if (curso.Id === undefined || curso.Id === 0){
         salvarCursos('POST', 0, curso); 
@@ -29,7 +30,7 @@ function carregaCursos(){
     xhr.open('GET', `http://localhost:62920/api/Curso`, true);
 
     xhr.onload = function(){
-        console.log(this.responseText);      
+        //console.log(this.responseText);      
         var cursos = JSON.parse(this.responseText);
         for(var indice in cursos){
             adicionaLinha(cursos[indice]);
@@ -115,8 +116,7 @@ function editarCurso(_curso){
     titulo.textContent = `Editar Curso - ${_curso.Name}`;
 
     curso = _curso;
-
-    console.log(curso);
+    //console.log(curso);
 }
 
 function Cancelar(){
@@ -136,7 +136,7 @@ function Cancelar(){
     $('#myModal').modal('hide');
 }
 
-function NovoAluno(){
+function NovoCurso(){
     var btnSalvar = document.querySelector("#btnSalvar");    
     var titulo = document.querySelector("#tituloModal");
 
@@ -145,7 +145,7 @@ function NovoAluno(){
     document.querySelector("#descricao").value = '';
     document.querySelector("#qtdAlunos").value = '';
 
-    aluno = {};
+    curso = {};
 
     btnSalvar.textContent = "Cadastrar";
     titulo.textContent = "Cadastrar Curso";
